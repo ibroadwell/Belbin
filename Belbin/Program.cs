@@ -83,46 +83,29 @@ for (int x = 0; x < headings.Length; x++)
 
 int[] finalResults = new int[8];
 int[] finalResultsIndex = new int[8];
+int[,] scoringPattern = { { 2, 0, 6, 1, 5, 5, 4 },
+                          { 6, 5, 3, 2, 4, 3, 6 },
+                          { 3, 4, 5, 5, 0, 4, 5 },
+                          { 5, 7, 1, 3, 6, 0, 2 },
+                          { 4, 3, 2, 4, 2, 2, 1 },
+                          { 0, 6, 4, 0, 3, 7, 0 },
+                          { 7, 2, 7, 7, 1, 6, 7 },
+                          { 1, 1, 0, 6, 7, 1, 3 } };
 
-//scoring for SH
-finalResults[0] = results[0, 2] + results[1, 0] + results[2, 6] + results[3, 1] + results[4, 5] + results[5, 5] + results[6, 4];
-finalResultsIndex[0] = 0;
-Console.WriteLine("SH: " + finalResults[0]);
 
-//scoring for CO
-finalResults[1] = results[0, 6] + results[1, 5] + results[2, 3] + results[3, 2] + results[4, 4] + results[5, 3] + results[6, 6];
-finalResultsIndex[1] = 1;
-Console.WriteLine("CO: " + finalResults[1]);
+Console.Clear();
+Console.WriteLine("Belbin Test Results");
+Console.WriteLine();
+for (int i = 0; i < results.GetLength(1); i++)
+{
+    for (int j = 0; j < results.GetLength(0); j++)
+    {
+        finalResults[i] += results[j, scoringPattern[i, j]];
 
-//scoring for PL
-finalResults[2] = results[0, 3] + results[1, 4] + results[2, 5] + results[3, 5] + results[4, 0] + results[5, 4] + results[6, 5];
-finalResultsIndex[2] = 2;
-Console.WriteLine("PL: " + finalResults[2]);
+    }
+    Console.WriteLine(BelbinType(i) + ": " + finalResults[i]);
+}
 
-//scoring for RI
-finalResults[3] = results[0, 5] + results[1, 7] + results[2, 1] + results[3, 3] + results[4, 6] + results[5, 0] + results[6, 2];
-finalResultsIndex[3] = 3;
-Console.WriteLine("RI: " + finalResults[3]);
-
-//scoring for ME
-finalResults[4] = results[0, 4] + results[1, 3] + results[2, 2] + results[3, 4] + results[4, 2] + results[5, 2] + results[6, 1];
-finalResultsIndex[4] = 4;
-Console.WriteLine("ME: " + finalResults[4]);
-
-//scoring for IMP
-finalResults[5] = results[0, 0] + results[1, 6] + results[2, 4] + results[3, 0] + results[4, 3] + results[5, 7] + results[6, 0];
-finalResultsIndex[5] = 5;
-Console.WriteLine("IMP: " + finalResults[5]);
-
-//scoring for TW
-finalResults[6] = results[0, 7] + results[1, 2] + results[2, 7] + results[3, 7] + results[4, 1] + results[5, 6] + results[6, 7];
-finalResultsIndex[6] = 6;
-Console.WriteLine("TW: " + finalResults[6]);
-
-//scoring for CF
-finalResults[7] = results[0, 1] + results[1, 1] + results[2, 0] + results[3, 6] + results[4, 7] + results[5, 1] + results[6, 3];
-finalResultsIndex[7] = 7;
-Console.WriteLine("CF: " + finalResults[7]);
 
 //sorting
 
@@ -150,8 +133,8 @@ for (int i = 0; i < 8; i++)
         }
     }
 }
-Console.WriteLine("Your primary type is: " + BelbinType(finalResultsIndex[primaryIndex]));
-Console.WriteLine("Your secondary type is: " + BelbinType(finalResultsIndex[secondaryIndex]));
+Console.WriteLine("Your primary type is: " + BelbinType(primaryIndex));
+Console.WriteLine("Your secondary type is: " + BelbinType(secondaryIndex));
 
 string BelbinType(int num)
 {
@@ -182,7 +165,7 @@ string BelbinType(int num)
     }
     else if (num == 6)
     {
-        type = "TW = Team Worker";
+        type = "TW - Team Worker";
     }
     else if (num == 7)
     {
@@ -285,7 +268,6 @@ string Scoring(string[,] sectionQuestions, int index)
                 Console.WriteLine("Please enter digits");
                 continue;
             }
-            //aSectionScore[int.Parse(aSectionArray[c]) - 1] = int.Parse(Console.ReadLine());
         }
         for (int i = 0; i < aSectionScore.Length; i++)
         {
