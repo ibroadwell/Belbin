@@ -260,9 +260,9 @@ string Scoring(string[,] sectionQuestions, int index)
         aSectionTotal = 0;
         for (int c = 0; c < aSectionArray.Length; c++)
         {
-            Console.WriteLine($"What score would you give statement {prompts[c, int.Parse(aSectionArray[c]) - 1]}");
+            Console.WriteLine($"What score would you give statement {prompts[index, int.Parse(aSectionArray[c]) - 1]}");
             aSectionScoreString = Console.ReadLine();
-            parseSuccess = int.TryParse(aSectionScoreString, out aSectionScore[int.Parse(aSectionArray[c]) - 1]);
+            parseSuccess = int.TryParse(aSectionScoreString, out aSectionScore[int.Parse(aSectionArray[c])]);
             if (parseSuccess == false || aSectionScore[c] > 10 || aSectionScore[c] < 0)
             {
                 Console.WriteLine("Please enter digits");
