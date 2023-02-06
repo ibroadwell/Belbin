@@ -51,14 +51,14 @@ string[,] prompts = { { "1. I can be relied upon to see that work that needs to 
 "6. I am happy to take the lead when action is required",
 "7. I can respond positively to my colleagues and their initiatives",
 "8. I find it hard to give in a jobw here the goals are not clearly defined"},
-{ "1. I start to look around for possible ideas and openings",
-"2. I am concerned to finish and perfect current work before I start",
-"3. I approach the problem in a carefully analytical way",
-"4. I am able to assert myself to get other people involved if necessary",
-"5. I am able to take an independent and innovative look at most situations",
-"6. I am happy to take the lead when action is required",
-"7. I can respond positively to my colleagues and their initiatives",
-"8. I find it hard to give in a jobw here the goals are not clearly defined"} };
+{ "1. I think I have a talent for sorting out the concrete steps that need to be taken given a broad brief",
+"2. My considered judgement may take time but is usually near the mark",
+"3. A broad range of personal contacts is important to my style of working",
+"4. I have an eye for getting the details right",
+"5. I try to make my mark in group meetings",
+"6. I can see how ideas and techniques can be used in new relationships",
+"7. I see both sides of a problem and take a decision acceptable to all",
+"8. I get on well with others and work hard for the team"} };
 
 string[] headings = { "Section A: WHEN INVOLVED IN A PROJECT WITH OTHER PEOPLE",
     "Section B: IN SEEKING SATISFACTION THROUGH MY WORK",
@@ -255,6 +255,8 @@ string Scoring(string[,] sectionQuestions, int index)
     string aSectionScoreString;
     bool parseSuccess = false;
 
+
+
     do
     {
         aSectionTotal = 0;
@@ -262,7 +264,8 @@ string Scoring(string[,] sectionQuestions, int index)
         {
             Console.WriteLine($"What score would you give statement {prompts[index, int.Parse(aSectionArray[c]) - 1]}");
             aSectionScoreString = Console.ReadLine();
-            parseSuccess = int.TryParse(aSectionScoreString, out aSectionScore[int.Parse(aSectionArray[c])]);
+            int temp = int.Parse(aSectionArray[c]);
+            parseSuccess = int.TryParse(aSectionScoreString, out aSectionScore[temp - 1]);
             if (parseSuccess == false || aSectionScore[c] > 10 || aSectionScore[c] < 0)
             {
                 Console.WriteLine("Please enter digits");
