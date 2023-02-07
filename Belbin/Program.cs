@@ -218,7 +218,7 @@ string Scoring(string[,] sectionQuestions, int index)
         string[] aSectionInputArray = aSectionInput.Split(' ');
 
         aSectionArray = aSectionInputArray;
-        if (!IsDigitsOrSpace(aSectionInput))
+        if (!IsDigitsOrSpace(aSectionInput) || aSectionInput[aSectionInput.Length - 1] == ' ' || aSectionInput[0] == ' ')
         {
             Console.WriteLine("Please enter only numbers and spaces");
             charTest = false;
